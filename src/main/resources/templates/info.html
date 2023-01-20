@@ -5,6 +5,8 @@
     <title>Win prediction</title>
 </head>
 <body>
+    <h1 style="text-align: center;">Showing <span th:text="${numberOfMatchesToDisplay}"></span> results.</h1>
+    <br>
     <div th:each="event : ${events}">
         <p>Start date: <b><span th:text="${event.startDate}"></span></b> </p>
         <p>Competition name: <b><span th:text="${event.competitionName}"></span></b> </p>
