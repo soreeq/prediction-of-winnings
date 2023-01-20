@@ -5,7 +5,16 @@
     <title>Win prediction</title>
 </head>
 <body>
-    <div th:each="event : ${events}"></div>
-    <p>ID: <span th:text="${event.sportEventId}"></span></p>
+    <div th:each="event : ${events}">
+        <p>Start date: <b><span th:text="${event.startDate}"></span></b> </p>
+        <p>Competition name: <b><span th:text="${event.competitionName}"></span></b> </p>
+        (<span th:text="${event.competitors[0].country}"></span>) <b><span th:text="${event.competitors[0].name}"></span></b> vs.
+        (<span th:text="${event.competitors[1].country}"></span>) <b><span th:text="${event.competitors[1].name}"></span></b> </p>
+        <p th:if="${event.venue != null}">Venue: <b><span th:text="${event.venue.name}"></span></b> </p>
+        <span th:if="${event.venue == null}">Venue: <b>no info</b> </span>
+        <p>The highest probable score is team <b><span th:text="${event.willProbablyWin}"></span></b> to win</p>
+        <p>The highest probable value is <b><span th:text="${event.highestProbability}"></span></b> </p>
+        <hr>
+    </div>
 </body>
 </html>
