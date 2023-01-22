@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Win prediction</title>
+</head>
+<body>
+<h1 style="text-align: center;">Showing <span th:text="${teamListLength}"></span> results.</h1>
+<br>
+<h1>List of sorted alphabetically teams name: </h1>
+<div th:each="event : ${sortedTeamList}">
+  <p><b><li><span th:text="${event}"></span></li></b></p>
+</div>
+</body>
+</html>
