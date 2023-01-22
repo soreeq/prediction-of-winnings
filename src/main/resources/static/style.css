@@ -1,34 +1,33 @@
-
-div {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+.table-container{
+    width: auto;
 }
 
-th {
+.table-header {
+width: 100%;
+font-weight: bold;
+background-color: lightgray;
+border-bottom: 1px solid gray;
+}
+
+.header-cell {
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.table-row {
+width: 100%;
+flex-wrap: nowrap;
+}
+
+.row-cell {
     border: 1px solid black;
-    margin: 10px;
-
-    border-collapse: separate;
-    border-spacing: 0 1em;
-}
-.margin {
-   margin:10px;
-}
-tr {
-    margin: 10px;
-    border-spacing: 0 1em;
-}
-td {
-
-    border: 1px solid black;
-    border-radius: 20px;
-    background-color: lightGray;
-    border-collapse: separate;
-    border-spacing: 0 1em;
-    margin: 10px 20px 5px 15px;
-}
-table {
-    border-collapse: separate;
-    border-spacing: 0 1em;
+    border-radius: 1em;
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+    box-sizing: border-box;
 }

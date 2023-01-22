@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Win prediction</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <h1 style="text-align: center;">Showing <span th:text="${teamListLength}"></span> results.</h1>
-<br>
-<h1>List of sorted alphabetically teams name: </h1>
-<div th:each="event : ${sortedTeamList}">
-  <p><b><li><span th:text="${event}"></span></li></b></p>
+<div class="table-container" style="display: flex; flex-wrap: wrap;">
+  <div th:each="event : ${sortedTeamList}" class="table-row">
+    <div class="row-cell"><span th:text="${event}"></span></div>
+  </div>
 </div>
 </body>
 </html>

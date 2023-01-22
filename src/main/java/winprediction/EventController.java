@@ -82,8 +82,6 @@ public class EventController {
 
         modelMap.addAttribute("numberOfMatchesToDisplay", numberOfMatchesToDisplay);
         modelMap.addAttribute("events", eventList);
-        modelMap.addAttribute("sortedTeams", uniqueTeams);
-        System.out.println(uniqueTeams);
         return "info";
     }
 

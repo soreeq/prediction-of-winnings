@@ -8,27 +8,29 @@
 <body>
     <h1 style="text-align: center;">Showing <span th:text="${numberOfMatchesToDisplay}"></span> results.</h1>
     <br>
-    <div style="display: flex;" th:each="event : ${events}">
-        <table style="text-align: center; border: 1px solid red;">
-            <tr>
-                <th>Start date</th>
-                <th>Competition name</th>
-                <th>Home team</th>
-                <th>Away team</th>
-                <th>Venue</th>
-                <th>The highest probable score</th>
-                <th>The highest probable value</th>
-            </tr>
-            <tr th:each="event : ${events}">
-                <td th:text="${event.startDate}"></td>
-                <td th:text="${event.competitionName}"></td>
-                <td th:text="${event.competitors[0].country}"></span>) <b><span th:text="${event.competitors[0].name}"></span></b></td>
-                <td th:text="${event.competitors[1].country}"></span>) <b><span th:text="${event.competitors[1].name}"></span></b></td>
-                <td th:if="${event.venue != null}">Venue: <b><span th:text="${event.venue.name} "></span></b> </p><span th:if="${event.venue == null}">Venue: <b>no info</b> </span></td>
-                                    <td th:text="${event.willProbablyWin}"></td>
-                                    <td th:text="${event.highestProbability}"></td>
-                                </tr>
-                            </table>
+    <div class="table-container" style="display: flex; flex-wrap: wrap;">
+        <div class="table-header" style="display: flex;">
+            <div class="header-cell">Start date</div>
+            <div class="header-cell">Competition name</div>
+            <div class="header-cell">Home team</div>
+            <div class="header-cell">Away team</div>
+            <div class="header-cell">Venue</div>
+            <div class="header-cell">The highest probable score</div>
+            <div class="header-cell">The highest probable value</div>
+        </div>
+        <div th:each="event : ${events}" class="table-row" style="display: flex;">
+            <div class="row-cell"> <span th:text="${event.startDate}"></span> </div>
+            <div class="row-cell"> <span th:text="${event.competitionName}"></span> </div>
+            <div class="row-cell"> <span th:text="${event.competitors[0].country}"></span> <b><span th:text="${event.competitors[0].name}"></span></b> </div>
+            <div class="row-cell"> <span th:text="${event.competitors[1].country}"></span> <b><span th:text="${event.competitors[1].name}"></span></b> </div>
+            <div class="row-cell">
+                <span th:if="${event.venue != null}">Venue: <b><span th:text="${event.venue.name}"></span></b> </span>
+                <span th:if="${event.venue == null}">Venue: <b>no info</b> </span>
+            </div>
+            <div class="row-cell"> <span th:text="${event.willProbablyWin}"></span> </div>
+            <div class="row-cell"> <span th:text="${event.highestProbability}"></span> </div>
+        </div>
+    </div>
                     <!--        <p>Start date: <b><span th:text="${event.startDate}"></span></b> </p>-->
 <!--        <p>Competition name: <b><span th:text="${event.competitionName}"></span></b> </p>-->
 <!--        (<span th:text="${event.competitors[0].country}"></span>) <b><span th:text="${event.competitors[0].name}"></span></b> vs.-->
