@@ -15,7 +15,7 @@ import java.util.*;
 public class EventController {
 
     @GetMapping("/sort")
-    public Set<String> mapDataFromJson(ModelMap modelMap) throws IOException {
+    public Set<Competitor> mapDataFromJson(ModelMap modelMap) throws IOException {
 
         byte[] jsonData = Files.readAllBytes(Paths.get("C:\\Users\\gszaw\\OneDrive\\Pulpit\\prediction of winnings\\src\\main\\resources\\json\\data.json"));
         String jsonString = new String(jsonData);
@@ -24,28 +24,26 @@ public class EventController {
         Events events = mapper.readValue(jsonString, Events.class);
 
         Set<String> uniqueTeams = new TreeSet<>();
+        Set<Competitor> listOfCompetitors = new TreeSet<>(Comparator.comparing(Competitor::getName));
 
         for (Event event : events.getEvents()){
-            uniqueTeams.add(event.getCompetitors().get(0).getName());
+            listOfCompetitors.add(event.getCompetitors().get(0));
         }
 
-        modelMap.addAttribute("sortedTeamList", uniqueTeams);
-        modelMap.addAttribute("teamListLength", uniqueTeams.size());
-        return uniqueTeams;
+        modelMap.addAttribute("sortedTeamList", listOfCompetitors);
+        modelMap.addAttribute("teamListLength", listOfCompetitors.size());
+
+        return listOfCompetitors;
     }
     @GetMapping("/event")
-    public String showEvent(ModelMap modelMap, @RequestParam(value = "limit", defaultValue = "10") int numberOfMatchesToDisplay) throws Exception {
-//
+    public List<Event> showEvent(ModelMap modelMap, @RequestParam(value = "limit", defaultValue = "10") int numberOfMatchesToDisplay) throws Exception {
+
         byte[] jsonData = Files.readAllBytes(Paths.get("C:\\Users\\gszaw\\OneDrive\\Pulpit\\prediction of winnings\\src\\main\\resources\\json\\data.json"));
         String jsonString = new String(jsonData);
-//
+
         ObjectMapper mapper = new ObjectMapper();
         Events events = mapper.readValue(jsonString, Events.class);
         List<Event> eventList = new ArrayList<>();
-//
-//        List<String> uniqueTeams = new ArrayList<>();
-        Set<String> uniqueTeams = new TreeSet<>();
-//        uniqueTeams = mapDataFromJson();
 
         int counter = 0;
         for (Event event : events.getEvents()){
@@ -79,10 +77,9 @@ public class EventController {
                 break;
         }
 
-
         modelMap.addAttribute("numberOfMatchesToDisplay", numberOfMatchesToDisplay);
         modelMap.addAttribute("events", eventList);
-        return "info";
+        return eventList;
     }
 
 }
