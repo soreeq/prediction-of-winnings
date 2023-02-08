@@ -1,4 +1,4 @@
-package winprediction;
+package winprediction.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

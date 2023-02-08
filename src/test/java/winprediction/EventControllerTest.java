@@ -7,6 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.ModelMap;
+import winprediction.controller.EventController;
+import winprediction.model.Competitor;
+import winprediction.model.Event;
+import winprediction.model.Events;
 
 import java.io.IOException;
 import java.nio.file.Files;
