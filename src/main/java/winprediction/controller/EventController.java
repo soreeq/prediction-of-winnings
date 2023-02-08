@@ -23,8 +23,10 @@ public class EventController {
         Events events = new Events();
         Events mappedEvents = events.deserializeJson("src\\main\\resources\\json\\data.json", eventsClass);
 
-        if (numberOfMatchesToDisplay > mappedEvents.getEvents().size())
-            numberOfMatchesToDisplay = mappedEvents.getEvents().size();
+        List<Event> allEvents = mappedEvents.getEvents();
+        int actualLimit = Math.min(numberOfMatchesToDisplay, allEvents.size());
+        List<Event> eventsToDisplay = allEvents.subList(0, actualLimit);
+
 
         List<Event> eventList = mappedEvents.getEvents().stream()
                 .limit(Math.max(numberOfMatchesToDisplay, mappedEvents.getEvents().size()))
@@ -51,10 +53,10 @@ public class EventController {
                     return event;
                 }).collect(Collectors.toList());
 
-        modelMap.addAttribute("numberOfMatchesToDisplay", numberOfMatchesToDisplay);
-        modelMap.addAttribute("events", eventList);
+        modelMap.addAttribute("numberOfMatchesToDisplay", eventsToDisplay.size());
+        modelMap.addAttribute("events", eventsToDisplay);
 
-        return eventList;
+        return eventsToDisplay;
     }
 
 }

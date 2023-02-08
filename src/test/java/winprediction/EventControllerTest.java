@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -33,21 +34,25 @@ public class EventControllerTest {
     }
 
     @Test
-    public void mapDataFromJsonTest() throws IOException {
+    public void showSortedCompetitorsTest() throws Exception {
+        Class<Events> eventsClass = Events.class;
+        Events events = new Events();
+        Events expected = events.deserializeJson("src\\main\\resources\\json\\data.json", eventsClass);
 
-        byte[] jsonData = Files.readAllBytes(Paths.get("C:\\Users\\gszaw\\OneDrive\\Pulpit\\prediction of winnings\\src\\main\\resources\\json\\data.json"));
-        String jsonString = new String(jsonData);
-        ObjectMapper mapper = new ObjectMapper();
-        Events events = mapper.readValue(jsonString, Events.class);
-        Set<Competitor> expected = new TreeSet<>(Comparator.comparing(Competitor::getName));
+        List<String> sortedCompetitorList = expected.getEvents().stream()
+                .flatMap(event -> event.getCompetitors().stream().map(Competitor::getName))
+                .distinct()
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
 
-        for (Event event : events.getEvents()){
-            expected.add(event.getCompetitors().get(0));
-        }
+        List<String> result = eventController.showEvent(modelMap, 100)
+                .stream()
+                .flatMap(event -> event.getCompetitors().stream().map(Competitor::getName))
+                .distinct()
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
 
-        Set<Competitor> result = eventController.mapDataFromJson(modelMap);
-
-        assertEquals(expected, result);
+        assertEquals(sortedCompetitorList, result);
     }
 
     @Test
@@ -58,6 +63,6 @@ public class EventControllerTest {
         List<Event> result = eventController.showEvent(modelMap, expected);
 
         assertEquals(expected, result.size());
-
     }
+
 }
