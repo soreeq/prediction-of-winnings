@@ -8,37 +8,11 @@
 <body>
 <h1 style="text-align: center;">Showing <span th:text="${teamListLength}"></span> teams sorted alphabetically by team name.</h1>
 <div class="table-container" style="display: flex;">
-    <div class="header-cell"><b><h2>Id team</h2></b>
+    <div class="header-cell"><b><h2>Teams: </h2></b>
         <div th:each="competitor : ${sortedTeamList}" class="table-column" style="display:flex;">
             <div class="column-cell"> <span th:text="${competitor}"></span> </div>
         </div>
     </div>
-
-
-<!--<div class="table-container" style="display: flex;">-->
-<!--    <div class="header-cell"><b><h2>Id team</h2></b>-->
-<!--      <div th:each="team : ${sortedTeamList}" class="table-column" style="display:flex;">-->
-<!--        <div class="column-cell"> <span th:text="${team.id}"></span> </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="header-cell"><h2>Team Abbreviation</h2>-->
-<!--      <div th:each="team : ${sortedTeamList}" class="table-column" style="display:flex;">-->
-<!--        <div class="column-cell"> <span th:text="${team.abbreviation}"></span> </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="header-cell"><h2>Country</h2>-->
-<!--      <div th:each="team : ${sortedTeamList}" class="table-column" style="display:flex;">-->
-<!--        <div class="column-cell"> <span th:text="${team.country}"></span> </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="header-cell"><h2>Name</h2>-->
-<!--      <div th:each="team : ${sortedTeamList}" class="table-column" style="display: flex;">-->
-<!--        <div class="column-cell"> <span th:text="${team.name}"></span> </div>-->
-<!--      </div>-->
-<!--  </div>-->
-
-
-
 </div>
 </body>
 </html>

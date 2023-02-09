@@ -1,6 +1,7 @@
-package winprediction.model;
+package winprediction.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import winprediction.model.Events;
 
 import java.io.IOException;
 import java.nio.file.Files;
